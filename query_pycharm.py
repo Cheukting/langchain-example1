@@ -26,10 +26,10 @@ def build_agent(k: int = 6) -> AgentExecutor:
     embeddings = OpenAIEmbeddings(
         model=settings.openai_embedding_model, api_key=settings.openai_api_key
     )
-    vs = FAISS.load_local(
+    vector_store = FAISS.load_local(
         settings.index_dir, embeddings, allow_dangerous_deserialization=True
     )
-    retriever = vs.as_retriever(
+    retriever = vector_store.as_retriever(
         search_type="mmr", search_kwargs={"k": k, "fetch_k": max(k * 3, 12)}
     )
 
