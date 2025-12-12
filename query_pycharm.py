@@ -2,7 +2,8 @@ import argparse
 from typing import List
 
 from langchain_community.vectorstores import FAISS
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain.chat_models import init_chat_model
+from langchain_openai import OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 from langchain.agents import AgentExecutor, create_agent
@@ -53,8 +54,12 @@ def build_agent(k: int = 6) -> AgentExecutor:
         ]
     )
 
-    llm = ChatOpenAI(
-        model=settings.openai_chat_model, api_key=settings.openai_api_key, temperature=0
+    # Initialize the chat model via LangChain's init_chat_model helper
+    llm = init_chat_model(
+        model=settings.openai_chat_model,
+        model_provider="openai",
+        api_key=settings.openai_api_key,
+        temperature=0,
     )
     # LangChain v1: use the generic create_agent factory
     agent = create_agent(llm=llm, tools=[pycharm_docs_search], prompt=prompt)
