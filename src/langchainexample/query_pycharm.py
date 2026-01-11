@@ -9,7 +9,7 @@ from langchain_core.tools import tool
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableLambda
 
-from config import settings, require_api_key
+from .config import settings, require_api_key
 
 
 def format_docs(docs) -> str:

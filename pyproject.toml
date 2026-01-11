@@ -19,9 +19,13 @@ dependencies = [
     "tqdm>=4.66.0",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project.scripts]
-ingest-pycharm = "ingest_pycharm_docs:main"
-ask-pycharm = "query_pycharm:main"
+ingest-pycharm = "langchainexample.ingest_pycharm_docs:main"
+ask-pycharm = "langchainexample.query_pycharm:main"
 
 [dependency-groups]
 dev = [

@@ -3,6 +3,8 @@
 This project builds a local retrieval-augmented generation pipeline to answer questions using the official PyCharm documentation at:
 https://www.jetbrains.com/help/pycharm/
 
+It uses [uv](https://docs.astral.sh/uv/) as project manager.
+
 It uses:
 - LangChain v1 tool-calling Agent for orchestration at query time
 - OpenAI (GPT-5) as the chat model and `text-embedding-3-large` for embeddings
@@ -16,15 +18,13 @@ It uses:
 
 ## Setup
 
-1. Create and activate a virtual environment (example with venv):
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already.
+
+2. Sync dependencies:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate
+   uv sync
    ```
-2. Install dependencies:
-   ```bash
-   pip install -e .
-   ```
+
 3. Set environment variables (create a `.env` file or export in shell):
    ```
    OPENAI_API_KEY=sk-... # required
@@ -39,11 +39,11 @@ It uses:
 This downloads and processes the PyCharm docs and stores a FAISS index locally.
 - Full run (can take some time):
   ```bash
-  ingest-pycharm
+  uv run ingest-pycharm
   ```
 - Quick demo (limit number of pages):
   ```bash
-  ingest-pycharm --max-docs 120
+  uv run ingest-pycharm --max-docs 120
   ```
 The index is saved in `INDEX_DIR` (default `indexes/pycharm_faiss`).
 
@@ -51,13 +51,13 @@ The index is saved in `INDEX_DIR` (default `indexes/pycharm_faiss`).
 
 Once indexing is complete, you can query with a LangChain v1 tool-calling Agent. The agent uses a single tool, `pycharm_docs_search`, which looks up relevant chunks in the local FAISS index and feeds them to GPT-5.
 ```bash
-ask-pycharm "How do I create a new project from existing sources?"
+uv run ask-pycharm "How do I create a new project from existing sources?"
 ```
 Options:
 - `--k` Number of documents to retrieve (default 6)
 Example:
 ```bash
-ask-pycharm --k 8 "Configure a remote interpreter for Docker"
+uv run ask-pycharm --k 8 "Configure a remote interpreter for Docker"
 ```
 
 ## Notes & Tips
