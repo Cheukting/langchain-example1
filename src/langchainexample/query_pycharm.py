@@ -77,7 +77,9 @@ def build_agent(k: int = 6) -> RunnableLambda:
         if response.tool_calls:
             print("\n--- Action Plan ---")
             for i, tool_call in enumerate(response.tool_calls, 1):
-                print(f"{i}. Call tool '{tool_call['name']}' with args: {tool_call['args']}")
+                print(
+                    f"{i}. Call tool '{tool_call['name']}' with args: {tool_call['args']}"
+                )
             print("-------------------\n")
 
             messages.append(response)
@@ -92,8 +94,6 @@ def build_agent(k: int = 6) -> RunnableLambda:
             response = llm_with_tools.invoke(messages)
 
         return {"output": response.content}
-
-
 
     return RunnableLambda(agent_loop)
 
