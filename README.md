@@ -53,12 +53,6 @@ Once indexing is complete, you can query with a LangChain v1 tool-calling Agent.
 ```bash
 uv run ask-pycharm "How do I create a new project from existing sources?"
 ```
-Options:
-- `--k` Number of documents to retrieve (default 6)
-Example:
-```bash
-uv run ask-pycharm --k 8 "Configure a remote interpreter for Docker"
-```
 
 ## Notes & Tips
 
@@ -78,4 +72,4 @@ MIT
 
 ## Disclaimer
 
-This example project is generated with [Junie](https://www.jetbrains.com/junie/) and then examined by a human. It is not intended for production use.
+This example project is generated with [Junie](https://www.jetbrains.com/junie/) and then examined and edited by a human. It is not intended for production use.

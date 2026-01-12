@@ -7,7 +7,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 
-from config import settings, require_api_key
+from .config import settings, require_api_key
 
 
 def load_docs(max_documents: int | None = None) -> List[Document]:
