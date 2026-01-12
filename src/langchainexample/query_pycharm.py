@@ -1,8 +1,9 @@
 from typing import List
+import argparse
 
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-from langchain_core.tools import tool
+from langchain.tools import tool
 
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
@@ -51,9 +52,7 @@ def main():
         description="Ask PyCharm docs via an Agent (FAISS + GPT-5)"
     )
     parser.add_argument("question", type=str, nargs="+", help="Your question")
-    parser.add_argument(
-        "--k", type=int, default=6, help="Number of documents to retrieve"
-    )
+
     args = parser.parse_args()
     question = " ".join(args.question)
 
